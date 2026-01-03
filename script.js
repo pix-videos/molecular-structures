@@ -8,7 +8,7 @@ const moleculeData = {
     dna: {
         name: 'DNA Helix',
         formula: 'Deoxyribonucleic Acid',
-        model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Replace with DNA model
+        model: 'https://static.poly.pizza/3bd92894-a0a4-4cc5-ad02-29d29341944f.glb', // DNA model by Zoe XR
         description: 'DNA (deoxyribonucleic acid) is the molecule that carries the genetic instructions for life. Its iconic double helix structure, discovered by Watson and Crick in 1953, consists of two strands wound around each other, connected by base pairs.',
         properties: {
             weight: '~2 trillion Da (human genome)',
@@ -26,7 +26,7 @@ const moleculeData = {
     hemoglobin: {
         name: 'Hemoglobin',
         formula: 'C₂₉₅₂H₄₆₆₄O₈₃₂S₈Fe₄',
-        model: 'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb', // Replace with hemoglobin model
+        model: 'https://static.poly.pizza/d85e26a9-cc20-4b41-a69e-6ce0d4e4c481.glb', // White blood cell model by Poly by Google
         description: 'Hemoglobin is the iron-containing protein in red blood cells that carries oxygen from the lungs to the rest of the body. Each hemoglobin molecule contains four iron atoms, each capable of binding one oxygen molecule.',
         properties: {
             weight: '64,458 Da',
@@ -44,7 +44,7 @@ const moleculeData = {
     glucose: {
         name: 'Glucose',
         formula: 'C₆H₁₂O₆',
-        model: 'https://modelviewer.dev/shared-assets/models/MaterialsVariantsShoe.glb', // Replace with glucose model
+        model: 'https://static.poly.pizza/6f0cca6d-bb5d-460c-998a-a72b98e899c0.glb', // Crystal model by iPoly3D
         description: 'Glucose is a simple sugar and the primary source of energy for cells. It\'s the most important carbohydrate in biology, serving as both a fuel and a building block for more complex molecules.',
         properties: {
             weight: '180.16 Da',
@@ -62,7 +62,7 @@ const moleculeData = {
     caffeine: {
         name: 'Caffeine',
         formula: 'C₈H₁₀N₄O₂',
-        model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Replace with caffeine model
+        model: 'https://static.poly.pizza/dd31a811-8a01-4277-9ead-889cb9019631.glb', // Coffee bean model by Poly by Google
         description: 'Caffeine is the world\'s most widely consumed psychoactive substance. It works by blocking adenosine receptors in the brain, preventing the onset of drowsiness and promoting alertness.',
         properties: {
             weight: '194.19 Da',

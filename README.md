@@ -136,7 +136,11 @@ MIT License - feel free to use this for educational purposes.
 ## 🙏 Credits
 
 - Background Image: [Louis Reed on Unsplash](https://unsplash.com/@_louisreed) - Laboratory/science photography
-- 3D Models: Placeholder models from [Model-Viewer Examples](https://modelviewer.dev/)
+- 3D Models from [Poly Pizza](https://poly.pizza):
+    - DNA: [Zoe XR](https://poly.pizza/m/0e5xgkdcuEW) (CC BY)
+    - Hemoglobin: [Poly by Google](https://poly.pizza/m/aoZ4DjiO35h) - White blood cell model as biochemical placeholder (CC BY)
+    - Glucose: [iPoly3D](https://poly.pizza/m/5dXobG8vsp) - Crystal model as molecular placeholder (CC BY)
+    - Caffeine: [Poly by Google](https://poly.pizza/m/7ONZQTx9Tuz) - Coffee bean model for caffeine representation (CC BY)
 - Fonts: [Google Fonts](https://fonts.google.com/)
 - Molecular data: Compiled from public scientific sources
 
