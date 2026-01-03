@@ -135,6 +135,7 @@ MIT License - feel free to use this for educational purposes.
 
 ## 🙏 Credits
 
+- Background Image: [Louis Reed on Unsplash](https://unsplash.com/@_louisreed) - Laboratory/science photography
 - 3D Models: Placeholder models from [Model-Viewer Examples](https://modelviewer.dev/)
 - Fonts: [Google Fonts](https://fonts.google.com/)
 - Molecular data: Compiled from public scientific sources
