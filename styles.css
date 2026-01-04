@@ -415,6 +415,10 @@ body {
     font-size: 0.9rem;
 }
 
+.empty-slot:empty {
+    display: none;
+}
+
 model-viewer[src] .empty-slot {
     display: none;
 }

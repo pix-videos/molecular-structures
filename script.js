@@ -85,6 +85,7 @@ let selectedMolecule = 'dna';
 let slot1Molecule = null;
 let slot2Molecule = null;
 let syncEnabled = false;
+let lastFilledSlot = 0; // Track which slot was filled last (for alternating when both are full)
 
 // DOM Elements
 const navBtns = document.querySelectorAll('.nav-btn');
@@ -145,15 +146,19 @@ function setupMoleculeSelection() {
             card.classList.add('active');
             
             if (currentView === 'compare') {
-                // Find first empty slot, or use slot 1 if both are full
+                // Find first empty slot, or alternate if both are full
                 let targetSlot = 1;
-                if (slot1Molecule && !slot2Molecule) {
-                    targetSlot = 2;
-                } else if (!slot1Molecule) {
+                if (!slot1Molecule) {
                     targetSlot = 1;
+                } else if (!slot2Molecule) {
+                    targetSlot = 2;
+                } else {
+                    // Both slots are full - alternate between them
+                    targetSlot = lastFilledSlot === 1 ? 2 : 1;
                 }
                 // Load into the target slot
                 loadIntoSlot(moleculeId, targetSlot);
+                lastFilledSlot = targetSlot;
             } else {
                 loadSingleView(moleculeId);
             }
@@ -181,13 +186,16 @@ function setupMoleculeSelection() {
 function highlightNextSlot() {
     clearSlotHighlights();
     let targetSlot = 1;
-    if (slot1Molecule && !slot2Molecule) {
-        targetSlot = 2;
-    } else if (!slot1Molecule) {
+    if (!slot1Molecule) {
         targetSlot = 1;
+    } else if (!slot2Molecule) {
+        targetSlot = 2;
+    } else {
+        // Both slots are full - show which one will be replaced next
+        targetSlot = lastFilledSlot === 1 ? 2 : 1;
     }
     const slotEl = document.getElementById(`slot${targetSlot}`);
-    if (slotEl && !slotEl.classList.contains('slot-filled')) {
+    if (slotEl) {
         slotEl.classList.add('slot-highlight');
     }
 }
@@ -372,6 +380,11 @@ function clearSlot(slot) {
         slot1Molecule = null;
     } else {
         slot2Molecule = null;
+    }
+    
+    // Reset last filled slot if we cleared it
+    if (lastFilledSlot === slot) {
+        lastFilledSlot = slot === 1 ? 2 : 1;
     }
     
     const slotLabel = slot === 1 ? 'Molecule A' : 'Molecule B';
