@@ -231,7 +231,7 @@ function loadIntoSlot(moleculeId, slot) {
     // Load model
     viewer.src = data.model;
     
-    // Mark slot as filled
+    // Mark slot as filled (CSS will hide empty-slot)
     slotEl.classList.add('slot-filled');
     
     // Update slot info
@@ -373,7 +373,7 @@ function clearSlot(slot) {
     // Clear the slot
     viewer.src = '';
     
-    // Mark slot as empty
+    // Mark slot as empty (CSS will show empty-slot)
     slotEl.classList.remove('slot-filled');
     
     if (slot === 1) {
@@ -390,7 +390,7 @@ function clearSlot(slot) {
     const slotLabel = slot === 1 ? 'Molecule A' : 'Molecule B';
     infoEl.innerHTML = `
         <h4>${slotLabel}</h4>
-        <p>Click a molecule card above or click this slot</p>
+        <p></p>
     `;
     
     updateComparisonTable();

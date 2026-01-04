@@ -419,7 +419,11 @@ body {
     display: none;
 }
 
-model-viewer[src] .empty-slot {
+.empty-slot p {
+    margin: 0;
+}
+
+.slot-filled .empty-slot {
     display: none;
 }
 
