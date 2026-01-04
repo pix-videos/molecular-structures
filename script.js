@@ -163,6 +163,7 @@ function loadIntoSlot(moleculeId, slot) {
     
     const viewer = slot === 1 ? viewer1 : viewer2;
     const infoEl = document.getElementById(`info${slot}`);
+    const slotEl = document.getElementById(`slot${slot}`);
     
     // Update slot state
     if (slot === 1) {
@@ -173,6 +174,9 @@ function loadIntoSlot(moleculeId, slot) {
     
     // Load model
     viewer.src = data.model;
+    
+    // Mark slot as filled
+    slotEl.classList.add('slot-filled');
     
     // Update slot info
     infoEl.innerHTML = `
@@ -273,31 +277,57 @@ function setupSyncRotation() {
     });
 }
 
-// Setup slot clear buttons
+// Setup slot clear buttons and clickable slots
 function setupSlotClear() {
     document.querySelectorAll('.slot-clear').forEach((btn, index) => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent slot click
             const slot = index + 1;
-            const viewer = slot === 1 ? viewer1 : viewer2;
-            const infoEl = document.getElementById(`info${slot}`);
-            
-            // Clear the slot
-            viewer.src = '';
-            
-            if (slot === 1) {
-                slot1Molecule = null;
-            } else {
-                slot2Molecule = null;
-            }
-            
-            infoEl.innerHTML = `
-                <h4>Select a molecule</h4>
-                <p>Click on a molecule card above to load it here</p>
-            `;
-            
-            updateComparisonTable();
+            clearSlot(slot);
         });
     });
+    
+    // Make slots clickable to add molecules
+    document.querySelectorAll('.compare-slot').forEach((slotEl, index) => {
+        slotEl.addEventListener('click', (e) => {
+            // Don't trigger if clicking on clear button or if slot already has a molecule
+            if (e.target.closest('.slot-clear')) return;
+            
+            const slot = index + 1;
+            const hasMolecule = (slot === 1 && slot1Molecule) || (slot === 2 && slot2Molecule);
+            
+            if (!hasMolecule && selectedMolecule) {
+                // Add currently selected molecule to this slot
+                loadIntoSlot(selectedMolecule, slot);
+            }
+        });
+    });
+}
+
+// Clear a slot
+function clearSlot(slot) {
+    const viewer = slot === 1 ? viewer1 : viewer2;
+    const infoEl = document.getElementById(`info${slot}`);
+    const slotEl = document.getElementById(`slot${slot}`);
+    
+    // Clear the slot
+    viewer.src = '';
+    
+    // Mark slot as empty
+    slotEl.classList.remove('slot-filled');
+    
+    if (slot === 1) {
+        slot1Molecule = null;
+    } else {
+        slot2Molecule = null;
+    }
+    
+    infoEl.innerHTML = `
+        <h4>Select a molecule</h4>
+        <p>Click on a molecule card above to load it here</p>
+    `;
+    
+    updateComparisonTable();
 }
 
 // Keyboard shortcuts

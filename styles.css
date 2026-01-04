@@ -319,6 +319,16 @@ body {
     border: 2px solid var(--border);
     border-radius: 20px;
     overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.compare-slot:not(.slot-filled) {
+    cursor: pointer;
+}
+
+.compare-slot:not(.slot-filled):hover {
+    border-color: var(--primary);
+    box-shadow: var(--glow-primary);
 }
 
 .slot-header {
@@ -378,6 +388,11 @@ body {
     text-align: center;
     color: var(--text-muted);
     pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.compare-slot:not(.slot-filled):hover .empty-slot {
+    color: var(--primary-light);
 }
 
 .empty-slot p {
