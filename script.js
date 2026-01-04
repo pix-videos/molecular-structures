@@ -230,9 +230,15 @@ function loadIntoSlot(moleculeId, slot) {
     
     // Load model
     viewer.src = data.model;
+    console.log(`Loading model into slot ${slot}:`, data.model);
     
     // Mark slot as filled (CSS will hide empty-slot)
     slotEl.classList.add('slot-filled');
+    
+    // Force model-viewer to be visible
+    viewer.style.opacity = '1';
+    viewer.style.pointerEvents = 'auto';
+    viewer.style.zIndex = '1';
     
     // Update slot info
     infoEl.innerHTML = `

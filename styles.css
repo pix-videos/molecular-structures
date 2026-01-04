@@ -404,11 +404,16 @@ body {
     pointer-events: none;
 }
 
-.slot-viewer model-viewer[src],
-.slot-filled model-viewer {
+.slot-viewer model-viewer[src] {
     opacity: 1 !important;
-    pointer-events: auto;
-    z-index: 1;
+    pointer-events: auto !important;
+    z-index: 1 !important;
+}
+
+.slot-filled .slot-viewer model-viewer {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 1 !important;
 }
 
 .empty-slot {
