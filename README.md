@@ -136,7 +136,13 @@ MIT License - feel free to use this for educational purposes.
 ## 🙏 Credits
 
 - Background Image: [Louis Reed on Unsplash](https://unsplash.com/@_louisreed) - Laboratory/science photography
-- 3D Models: Sample models from [Model-Viewer Examples](https://modelviewer.dev/) (Apache 2.0 License)
+- **Required Models:** Place GLB files in the `models/` folder:
+  - `dna.glb` - DNA double helix
+  - `hemoglobin.glb` - Hemoglobin molecule
+  - `glucose.glb` - Glucose molecule
+  - `caffeine.glb` - Caffeine molecule
+- **Download Guide:** See `models/README.md` for recommended sources and download instructions
+- **License:** Use CC0 or CC-BY licensed models (see download guide for sources)
 - Fonts: [Google Fonts](https://fonts.google.com/)
 - Molecular data: Compiled from public scientific sources
 
