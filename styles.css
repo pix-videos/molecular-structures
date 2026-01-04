@@ -394,6 +394,19 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+    position: relative;
+    z-index: 1;
+}
+
+.slot-viewer model-viewer:not([src]) {
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slot-viewer model-viewer[src] {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .empty-slot {
@@ -405,6 +418,7 @@ body {
     color: var(--text-muted);
     pointer-events: none;
     transition: color 0.3s ease;
+    z-index: 10;
 }
 
 .compare-slot:not(.slot-filled):hover .empty-slot {
