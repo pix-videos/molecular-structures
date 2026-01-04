@@ -84,7 +84,6 @@ let currentView = 'compare';
 let selectedMolecule = 'dna';
 let slot1Molecule = null;
 let slot2Molecule = null;
-let nextSlot = 1;
 let syncEnabled = false;
 
 // DOM Elements
@@ -146,14 +145,63 @@ function setupMoleculeSelection() {
             card.classList.add('active');
             
             if (currentView === 'compare') {
-                // Load into next available slot
-                loadIntoSlot(moleculeId, nextSlot);
-                nextSlot = nextSlot === 1 ? 2 : 1;
+                // Find first empty slot, or use slot 1 if both are full
+                let targetSlot = 1;
+                if (slot1Molecule && !slot2Molecule) {
+                    targetSlot = 2;
+                } else if (!slot1Molecule) {
+                    targetSlot = 1;
+                }
+                // Load into the target slot
+                loadIntoSlot(moleculeId, targetSlot);
             } else {
                 loadSingleView(moleculeId);
             }
+            
+            // Update slot highlights
+            updateSlotHighlights();
+        });
+        
+        // Add hover effect to show which slot will be filled
+        card.addEventListener('mouseenter', () => {
+            if (currentView === 'compare') {
+                highlightNextSlot();
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            if (currentView === 'compare') {
+                clearSlotHighlights();
+            }
         });
     });
+}
+
+// Highlight which slot will be filled next
+function highlightNextSlot() {
+    clearSlotHighlights();
+    let targetSlot = 1;
+    if (slot1Molecule && !slot2Molecule) {
+        targetSlot = 2;
+    } else if (!slot1Molecule) {
+        targetSlot = 1;
+    }
+    const slotEl = document.getElementById(`slot${targetSlot}`);
+    if (slotEl && !slotEl.classList.contains('slot-filled')) {
+        slotEl.classList.add('slot-highlight');
+    }
+}
+
+// Clear slot highlights
+function clearSlotHighlights() {
+    document.querySelectorAll('.compare-slot').forEach(slot => {
+        slot.classList.remove('slot-highlight');
+    });
+}
+
+// Update slot highlights based on current state
+function updateSlotHighlights() {
+    clearSlotHighlights();
 }
 
 // Load molecule into comparison slot
@@ -290,14 +338,18 @@ function setupSlotClear() {
     // Make slots clickable to add molecules
     document.querySelectorAll('.compare-slot').forEach((slotEl, index) => {
         slotEl.addEventListener('click', (e) => {
-            // Don't trigger if clicking on clear button or if slot already has a molecule
-            if (e.target.closest('.slot-clear')) return;
+            // Don't trigger if clicking on clear button or header
+            if (e.target.closest('.slot-clear') || e.target.closest('.slot-header')) return;
             
             const slot = index + 1;
             const hasMolecule = (slot === 1 && slot1Molecule) || (slot === 2 && slot2Molecule);
             
+            // If slot is empty and a molecule is selected, add it
             if (!hasMolecule && selectedMolecule) {
-                // Add currently selected molecule to this slot
+                loadIntoSlot(selectedMolecule, slot);
+            }
+            // If slot has a molecule, clicking selects it (for replacement)
+            else if (hasMolecule && selectedMolecule) {
                 loadIntoSlot(selectedMolecule, slot);
             }
         });
@@ -322,12 +374,14 @@ function clearSlot(slot) {
         slot2Molecule = null;
     }
     
+    const slotLabel = slot === 1 ? 'Molecule A' : 'Molecule B';
     infoEl.innerHTML = `
-        <h4>Select a molecule</h4>
-        <p>Click on a molecule card above to load it here</p>
+        <h4>${slotLabel}</h4>
+        <p>Click a molecule card above or click this slot</p>
     `;
     
     updateComparisonTable();
+    updateSlotHighlights();
 }
 
 // Keyboard shortcuts
