@@ -322,33 +322,13 @@ function setupControls() {
     });
 }
 
-// Setup slot clear buttons and clickable slots
+// Setup slot clear buttons
 function setupSlotClear() {
     document.querySelectorAll('.slot-clear').forEach((btn, index) => {
         btn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent slot click
+            e.stopPropagation();
             const slot = index + 1;
             clearSlot(slot);
-        });
-    });
-    
-    // Make slots clickable to add molecules
-    document.querySelectorAll('.compare-slot').forEach((slotEl, index) => {
-        slotEl.addEventListener('click', (e) => {
-            // Don't trigger if clicking on clear button or header
-            if (e.target.closest('.slot-clear') || e.target.closest('.slot-header')) return;
-            
-            const slot = index + 1;
-            const hasMolecule = (slot === 1 && slot1Molecule) || (slot === 2 && slot2Molecule);
-            
-            // If slot is empty and a molecule is selected, add it
-            if (!hasMolecule && selectedMolecule) {
-                loadIntoSlot(selectedMolecule, slot);
-            }
-            // If slot has a molecule, clicking selects it (for replacement)
-            else if (hasMolecule && selectedMolecule) {
-                loadIntoSlot(selectedMolecule, slot);
-            }
         });
     });
 }
@@ -379,7 +359,7 @@ function clearSlot(slot) {
     const slotLabel = slot === 1 ? 'Molecule A' : 'Molecule B';
     infoEl.innerHTML = `
         <h4>${slotLabel}</h4>
-        <p></p>
+        <p>Click a molecule card above</p>
     `;
     
     updateComparisonTable();
