@@ -230,8 +230,9 @@ function loadIntoSlot(moleculeId, slot) {
     // Mark slot as filled first (CSS will hide empty-slot)
     slotEl.classList.add('slot-filled');
     
-    // Load model
-    viewer.src = data.model;
+    // Load model with cache-busting
+    const cacheBuster = `?v=${Date.now()}`;
+    viewer.src = data.model + cacheBuster;
     console.log(`Loading model into slot ${slot}:`, data.model);
     
     // Force model-viewer to be visible with inline styles
@@ -287,7 +288,9 @@ function loadSingleView(moleculeId) {
     const data = moleculeData[moleculeId];
     if (!data) return;
     
-    singleViewer.src = data.model;
+    // Load model with cache-busting
+    const cacheBuster = `?v=${Date.now()}`;
+    singleViewer.src = data.model + cacheBuster;
     
     document.getElementById('singleTitle').textContent = data.name;
     document.getElementById('singleFormula').textContent = data.formula;
