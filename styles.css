@@ -400,13 +400,15 @@ body {
 
 .slot-viewer model-viewer:not([src]) {
     z-index: 0;
-    opacity: 0;
+    opacity: 0 !important;
     pointer-events: none;
 }
 
-.slot-viewer model-viewer[src] {
-    opacity: 1;
+.slot-viewer model-viewer[src],
+.slot-filled model-viewer {
+    opacity: 1 !important;
     pointer-events: auto;
+    z-index: 1;
 }
 
 .empty-slot {
