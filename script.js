@@ -86,6 +86,7 @@ let slot1Molecule = null;
 let slot2Molecule = null;
 let syncEnabled = false;
 let lastFilledSlot = 0; // Track which slot was filled last (for alternating when both are full)
+let syncListeners = { viewer1: null, viewer2: null }; // Store sync event listeners
 
 // DOM Elements
 const navBtns = document.querySelectorAll('.nav-btn');
@@ -319,6 +320,8 @@ function setupControls() {
         
         if (syncEnabled) {
             setupSyncRotation();
+        } else {
+            removeSyncRotation();
         }
     });
     
@@ -336,19 +339,42 @@ function setupControls() {
 
 // Sync rotation between viewers
 function setupSyncRotation() {
-    viewer1.addEventListener('camera-change', () => {
-        if (syncEnabled) {
+    // Remove existing listeners if any
+    removeSyncRotation();
+    
+    // Create sync functions
+    const syncViewer1ToViewer2 = () => {
+        if (syncEnabled && slot1Molecule && slot2Molecule) {
             viewer2.cameraOrbit = viewer1.cameraOrbit;
             viewer2.fieldOfView = viewer1.fieldOfView;
         }
-    });
+    };
     
-    viewer2.addEventListener('camera-change', () => {
-        if (syncEnabled) {
+    const syncViewer2ToViewer1 = () => {
+        if (syncEnabled && slot1Molecule && slot2Molecule) {
             viewer1.cameraOrbit = viewer2.cameraOrbit;
             viewer1.fieldOfView = viewer2.fieldOfView;
         }
-    });
+    };
+    
+    // Add event listeners and store references
+    viewer1.addEventListener('camera-change', syncViewer1ToViewer2);
+    viewer2.addEventListener('camera-change', syncViewer2ToViewer1);
+    
+    syncListeners.viewer1 = syncViewer1ToViewer2;
+    syncListeners.viewer2 = syncViewer2ToViewer1;
+}
+
+// Remove sync rotation listeners
+function removeSyncRotation() {
+    if (syncListeners.viewer1) {
+        viewer1.removeEventListener('camera-change', syncListeners.viewer1);
+        syncListeners.viewer1 = null;
+    }
+    if (syncListeners.viewer2) {
+        viewer2.removeEventListener('camera-change', syncListeners.viewer2);
+        syncListeners.viewer2 = null;
+    }
 }
 
 // Setup slot clear buttons and clickable slots
