@@ -1,6 +1,7 @@
 /**
  * Molecular Structures Viewer
  * Interactive 3D Chemistry Visualization
+ * Updated: 2026-01-04
  */
 
 // Molecule data
