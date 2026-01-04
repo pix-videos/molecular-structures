@@ -228,17 +228,29 @@ function loadIntoSlot(moleculeId, slot) {
         slot2Molecule = moleculeId;
     }
     
+    // Mark slot as filled first (CSS will hide empty-slot)
+    slotEl.classList.add('slot-filled');
+    
     // Load model
     viewer.src = data.model;
     console.log(`Loading model into slot ${slot}:`, data.model);
     
-    // Mark slot as filled (CSS will hide empty-slot)
-    slotEl.classList.add('slot-filled');
-    
-    // Force model-viewer to be visible
+    // Force model-viewer to be visible with inline styles
     viewer.style.opacity = '1';
     viewer.style.pointerEvents = 'auto';
-    viewer.style.zIndex = '1';
+    viewer.style.zIndex = '10';
+    
+    // Wait for model to load and ensure visibility
+    viewer.addEventListener('load', () => {
+        viewer.style.opacity = '1';
+        viewer.style.pointerEvents = 'auto';
+        viewer.style.zIndex = '10';
+        console.log(`Model loaded in slot ${slot}`);
+    });
+    
+    viewer.addEventListener('error', (e) => {
+        console.error(`Error loading model in slot ${slot}:`, e);
+    });
     
     // Update slot info
     infoEl.innerHTML = `
