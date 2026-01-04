@@ -9,7 +9,7 @@ const moleculeData = {
     dna: {
         name: 'DNA Helix',
         formula: 'Deoxyribonucleic Acid',
-        model: './models/dna.glb', // Place your DNA GLB model in the models/ folder
+        model: './models/3d-dna.glb',
         description: 'DNA (deoxyribonucleic acid) is the molecule that carries the genetic instructions for life. Its iconic double helix structure, discovered by Watson and Crick in 1953, consists of two strands wound around each other, connected by base pairs.',
         properties: {
             weight: '~2 trillion Da (human genome)',
@@ -27,7 +27,7 @@ const moleculeData = {
     hemoglobin: {
         name: 'Hemoglobin',
         formula: 'C₂₉₅₂H₄₆₆₄O₈₃₂S₈Fe₄',
-        model: './models/hemoglobin.glb', // Place your hemoglobin GLB model in the models/ folder
+        model: './models/3d-hemoglobin.glb',
         description: 'Hemoglobin is the iron-containing protein in red blood cells that carries oxygen from the lungs to the rest of the body. Each hemoglobin molecule contains four iron atoms, each capable of binding one oxygen molecule.',
         properties: {
             weight: '64,458 Da',
@@ -45,7 +45,7 @@ const moleculeData = {
     glucose: {
         name: 'Glucose',
         formula: 'C₆H₁₂O₆',
-        model: './models/glucose.glb', // Place your glucose GLB model in the models/ folder
+        model: './models/3d-glucose.glb',
         description: 'Glucose is a simple sugar and the primary source of energy for cells. It\'s the most important carbohydrate in biology, serving as both a fuel and a building block for more complex molecules.',
         properties: {
             weight: '180.16 Da',
@@ -63,7 +63,7 @@ const moleculeData = {
     caffeine: {
         name: 'Caffeine',
         formula: 'C₈H₁₀N₄O₂',
-        model: './models/caffeine.glb', // Place your caffeine GLB model in the models/ folder
+        model: './models/3d-caffeine.glb',
         description: 'Caffeine is the world\'s most widely consumed psychoactive substance. It works by blocking adenosine receptors in the brain, preventing the onset of drowsiness and promoting alertness.',
         properties: {
             weight: '194.19 Da',
